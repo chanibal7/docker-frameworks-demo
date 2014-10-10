@@ -1,0 +1,19 @@
+Executes below steps
+***************************
+/etc/init.d mysql start 
+sudo -i mysql -u root -p
+
+password = root
+
+create database test;
+
+use test;
+
+CREATE TABLE Car(id INT NOT NULL AUTO_INCREMENT,name VARCHAR(255) NOT NULL,PRIMARY KEY (id));
+
+CREATE TABLE Users(id INT NOT NULL AUTO_INCREMENT,email VARCHAR(100) NOT NULL,pwd VARCHAR(40) NOT NULL,PRIMARY KEY (id));
+
+INSERT INTO Users(email,pwd)VALUES("bbc@gmail.com", "dynamics");
+INSERT INTO Users(email,pwd)VALUES("xyz@gmail.com", "dynamics");
+
+****************************
