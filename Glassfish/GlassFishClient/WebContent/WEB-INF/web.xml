@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee" id="WebApp_ID" version="2.5">
+  <display-name>RESTfulWebServiceExample</display-name>  
+  <servlet>  
+    <servlet-name>glassfish</servlet-name>  
+    <servlet-class>com.glassfish.client.GlassFishClient</servlet-class>  
+    <load-on-startup>1</load-on-startup>  
+  </servlet>  
+  <servlet-mapping>  
+    <servlet-name>glassfish</servlet-name>  
+    <url-pattern>/client/*</url-pattern>  
+  </servlet-mapping>
+</web-app>
