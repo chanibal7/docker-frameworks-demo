@@ -75,5 +75,3 @@ RUN dos2unix /mnt/script/run.sh
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/glassfish.sql -O /mnt/tempdircopy/glassfish.sql
 RUN dos2unix /mnt/tempdircopy/glassfish.sql
 ##################### INSTALLATION END #####################
-
- 
