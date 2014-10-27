@@ -75,6 +75,7 @@ RUN dos2unix /mnt/tempdircopy/machine-controller-info.xml
 RUN mkdir /mnt/script
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/mysql/run.sh -O /mnt/script/run.sh
 RUN dos2unix /mnt/script/run.sh
+RUN chmod +x /mnt/script/run.sh
 
 
 ##################### INSTALLATION END #####################
