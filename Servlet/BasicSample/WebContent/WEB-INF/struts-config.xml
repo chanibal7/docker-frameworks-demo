@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+        "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+    <data-sources>
+    </data-sources>
+
+    <form-beans>
+        <form-bean name="inputForm"
+                   type="org.apache.struts.action.DynaActionForm">
+            <form-property name="firstName" type="java.lang.String"/>
+            <form-property name="lastName" type="java.lang.String"/>
+        </form-bean>
+    </form-beans>
+
+    <global-exceptions>
+    </global-exceptions>
+
+    <global-forwards>
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/InputSubmit" type="com.appdynamics.action.InputAction"
+                name="inputForm" scope="request" validate="true" input="index.jsp">
+            <forward name="success" path="/WEB-INF/pages/input.jsp"/>
+        </action>
+        <action path="/SampleSpring" name="inputForm" validate="false"
+                input="index.jsp"
+                type="org.springframework.web.struts.DelegatingActionProxy">
+            <forward name="success" path="/WEB-INF/pages/input.jsp"/>
+        </action>
+
+        <action path="/DispatchGreetings"
+                type="com.appdynamics.action.DispatchGreetings"
+                name="inputForm"
+                input="index.jsp"
+                validate="false"
+                scope="request"
+                parameter="method">
+            <forward name="success" path="/WEB-INF/pages/input.jsp"/>
+        </action>
+
+       
+
+    </action-mappings>
+
+</struts-config>

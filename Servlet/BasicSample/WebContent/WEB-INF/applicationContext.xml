@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>	
+	<bean id="userService" class="com.appdynamics.service.UserService"/>
+	
+    <bean id="user" class="com.appdynamics.pojo.User" autowire="default">
+        <property name="firstName"><value>default</value></property>
+        <property name="lastName"><value>default</value></property>
+    </bean>
+
+	<!-- Actions Classes -->
+	<bean name="/SampleSpring" class="com.appdynamics.action.DelegateGreetings" autowire="default">
+        <property name="user" ><ref bean="user"></ref></property>
+	</bean>
+	
+	<bean id="myBean" class="com.appdynamics.pojo.MyBean"/>
+
+</beans>

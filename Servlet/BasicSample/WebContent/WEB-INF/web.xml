@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.4"
+	xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<display-name>BasicSample</display-name>
+	<servlet>
+		<description></description>
+		<servlet-name>PojoServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<servlet-name>SamplingServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.SamplingServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<servlet-name>ErrorServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.ErrorServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<servlet-name>callGraphServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.CallGraphServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>test1</servlet-name>
+		<servlet-class>com.appdynamics.servlet.Test1Servlet</servlet-class>
+	</servlet>	
+	<servlet-mapping>
+		<servlet-name>test1</servlet-name>
+		<url-pattern>*.test1</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>
+		</description>
+		<display-name>CookieServlet</display-name>
+		<servlet-name>CookieServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.CookieServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>helloServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.HelloWorld</servlet-class>
+	</servlet>
+    <servlet-mapping>
+		<servlet-name>helloServlet</servlet-name>
+		<url-pattern>*.helloServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>userServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.UserServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+		<servlet-name>userServlet</servlet-name>
+		<url-pattern>*.userServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description>
+		</description>
+		<display-name>CookieServlet1</display-name>
+		<servlet-name>CookieServlet1</servlet-name>
+		<servlet-class>com.appdynamics.servlet.CookieServlet1</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>StudentServlet</display-name>
+		<servlet-name>StudentServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.StudentServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>QuartzServlet</display-name>
+		<servlet-name>QuartzServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.QuartzServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<description>
+		</description>
+		<display-name>MailServlet</display-name>
+		<servlet-name>MailServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.MailServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>Case1Servlet</display-name>
+		<servlet-name>Case1Servlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.Case1Servlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>MyServlet</display-name>
+		<servlet-name>MyServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.MyServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>Leak1Servlet</display-name>
+		<servlet-name>leak1Servlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.Leak1Servlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>Leak2Servlet</display-name>
+		<servlet-name>leak2Servlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.Leak2Servlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<description>
+		</description>
+		<display-name>objTrackServlet</display-name>
+		<servlet-name>objTrackServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.ObjTrackServlet</servlet-class>
+	</servlet>
+    
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>2</param-value>
+		</init-param>
+		<init-param>
+			<param-name>validate</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	
+	
+
+	<servlet>
+		<servlet-name>excServlet</servlet-name>
+		<servlet-class>binil.servlet.ExcServlet</servlet-class>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>excServlet</servlet-name>
+		<url-pattern>*.excServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet-mapping>
+		<servlet-name>PojoServlet</servlet-name>
+		<url-pattern>*.pojoservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SamplingServlet</servlet-name>
+		<url-pattern>*.samplingservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ErrorServlet</servlet-name>
+		<url-pattern>*.errorservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>objTrackServlet</servlet-name>
+		<url-pattern>*.objTrackServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CookieServlet</servlet-name>
+		<url-pattern>*.cookieservlet</url-pattern>
+	</servlet-mapping>
+    <servlet-mapping>
+		<servlet-name>CookieServlet1</servlet-name>
+		<url-pattern>*.cookieservlet1</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>QuartzServlet</servlet-name>
+		<url-pattern>*.quartzservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MailServlet</servlet-name>
+		<url-pattern>*.mailservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyServlet</servlet-name>
+		<url-pattern>*.myservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Case1Servlet</servlet-name>
+		<url-pattern>*.case1servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>leak1Servlet</servlet-name>
+		<url-pattern>*.leak1servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>leak2Servlet</servlet-name>
+		<url-pattern>*.leak2servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StudentServlet</servlet-name>
+		<url-pattern>*.studentServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>SpringContextServlet</servlet-name>
+		<servlet-class>org.springframework.web.context.ContextLoaderServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	
+	
+	<servlet>
+		<description></description>
+		<servlet-name>ClassNameEquals</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>callGraphServlet</servlet-name>
+		<url-pattern>*.callmoremethods</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ClassNameEquals</servlet-name>
+		<url-pattern>*.classnameequals</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>ServletNameEquals</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletNameEquals</servlet-name>
+		<url-pattern>*.servletnameequals</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>UriEquals</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UriEquals</servlet-name>
+		<url-pattern>*.uriequals</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<servlet-name>MethodEquals</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoServlet</servlet-class>
+	</servlet>
+    <servlet>
+        <servlet-name>DiskIoServlet</servlet-name>
+        <servlet-class>com.appdynamics.servlet.DiskIoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+		<servlet-name>MethodEquals</servlet-name>
+		<url-pattern>*.methodequals</url-pattern>
+	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DiskIoServlet</servlet-name>
+        <url-pattern>*.disk</url-pattern>
+    </servlet-mapping>
+	
+	
+	<servlet>
+		<description></description>
+		<servlet-name>methodBTServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.MethodBTServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>methodBTServlet</servlet-name>
+		<url-pattern>*.methodBTServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+     <servlet-name>pageRedirect</servlet-name>
+     <servlet-class>com.appdynamics.servlet.PageRedirect</servlet-class>
+ </servlet>
+
+ <servlet-mapping>
+     <servlet-name>pageRedirect</servlet-name>
+     <url-pattern>*.pageredirect</url-pattern>
+ </servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<servlet-name>pojoSplitServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.PojoSplitServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>pojoSplitServlet</servlet-name>
+		<url-pattern>*.pojoSplitServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<servlet-name>metOvrloadServlet</servlet-name>
+		<servlet-class>com.appdynamics.servlet.MetOvrloadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>metOvrloadServlet</servlet-name>
+		<url-pattern>*.methodOverloadServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	<resource-ref>
+      <description>DB Connection</description>
+      <res-ref-name>jdbc/TestDB</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+	</resource-ref>
+	
+	<filter>
+		<filter-name>LogFilter</filter-name>
+		<filter-class>com.appdynamics.filter.AccessControlFilter
+		</filter-class>
+		<init-param>
+			<param-name>test-param</param-name>
+			<param-value>This parameter is for testing.</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LogFilter</filter-name>
+		<url-pattern>/filter.jsp</url-pattern>
+	</filter-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
