@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:spring="http://www.springframework.org/schema/beans" xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd" version="EE-3.5.0">
+
+    <description>
+    This configuration uses an HTTP endpoint to receive requests.
+    </description>
+
+    <!--
+    To invoke the Hello service over HTTP, hit the following URL in your browser:
+
+        http://localhost:8888?name=Ross
+    -->
+
+    <custom-transformer class="org.mule.example.StringToNameString" name="StringToNameString" doc:name="Java"/>
+    <custom-transformer class="org.mule.example.NameStringToChatString" name="NameStringToChatString" doc:name="Java"/>
+    <custom-transformer class="org.mule.example.ChatStringToString" name="ChatStringToString" doc:name="Java"/>
+    <custom-transformer class="org.mule.example.HttpRequestToNameString" name="HttpRequestToNameString" doc:name="Java"/>
+    <custom-transformer class="org.mule.example.ExceptionToString" name="ExceptionToString" doc:name="Java"/>
+    <custom-transformer class="org.mule.transformer.simple.ObjectToString" name="ObjectToString" doc:name="Java"/>
+
+    <flow name="WonderWorld" doc:name="WonderWorld">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8888" doc:name="Http Endpoint"/>
+
+        <message-filter doc:name="Filter favicon">
+            <not-filter>
+                <wildcard-filter pattern="/favicon.ico" caseSensitive="true"/>
+            </not-filter>
+        </message-filter>
+        <transformer ref="HttpRequestToNameString" doc:name="Transform Http Request to NameString"/>
+        <flow-ref name="WonderWorldSubFlow" doc:name="Process request"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+        	<logger level="ERROR" message="#[payload]" doc:name="Log Error"/>
+        </catch-exception-strategy>
+    </flow>
+
+	<flow name="WonderWorldVm" doc:name="WonderWorldVm">
+		<vm:inbound-endpoint exchange-pattern="request-response" path="greeter" doc:name="VM Endpoint"/>
+		<transformer ref="StringToNameString" doc:name="Transformer String to NameString"/>
+		<flow-ref name="WonderWorldSubFlow" doc:name="Process request"/>
+	</flow>
+
+    <sub-flow name="WonderWorldSubFlow" doc:name="WonderWorldSubFlow">
+        <component class="org.mule.example.Greeter" doc:name="Greeter Component"/>
+        <choice doc:name="Choice">
+            <when expression="payload instanceof org.mule.example.NameString" evaluator="groovy">
+                <processor-chain doc:name="Processor Chain">
+                	<flow-ref name="ChitChat" doc:name="Process ChitChat"/>
+                </processor-chain>
+            </when>
+            <when expression="payload instanceof java.lang.Exception" evaluator="groovy">
+                <processor-chain doc:name="Processor Chain">
+                	<logger level="ERROR" message="#[payload]" doc:name="Error Log"/>
+                </processor-chain>
+            </when>
+        </choice>
+    </sub-flow>
+
+    <sub-flow name="ChitChat" doc:name="ChitChat">
+    	<transformer ref="NameStringToChatString" doc:name="Transform NameString to ChatString"/>
+        <component class="org.mule.example.ChitChatter" doc:name="ChitChatter component"/>
+        <transformer ref="ChatStringToString" doc:name="Transform ChatString to String"/>
+    </sub-flow>
+</mule>
