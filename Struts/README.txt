@@ -14,7 +14,3 @@ Steps to build docker image and Generate load for Struts framework:
 	4. Navigate to the path /mnt/script to run the script file "run.sh" which generate load for Struts framework
 	  -> pass arguments while running run.sh file as mentioned below
 	  -> ./run.sh <controller ip> <port number> ,eg:-./run.sh ec2-54-204-218-30.compute-1.amazonaws.com 80
-	  
-	  
-	  
-	  localhost:8080/SpringStruts/rest/rabbitmq/rabbitmqOperation
