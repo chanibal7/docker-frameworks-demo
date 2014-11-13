@@ -8,7 +8,7 @@ Script File :
   
 
 Steps to build docker image and Generate load for Spring Integration application:
-	1. Download Dockerfile from (url:https://github.com/Appdynamics/docker-applications-demo/tree/master/SpringIntegration)
+	1. Download Dockerfile from (url:https://github.com/Appdynamics/docker-frameworks-demo/tree/master/SpringIntegration)
 	2. Build the docker image by running the command :docker build -t="appdynamics/<application name>:<tagname>" <Docker filepath>
 	3. Build the container by running the command: docker run -i -t <latest generated image by docker file(image ID)> /bin/bash
 	4. Navigate to the path /mnt/script to run the script file "run.sh" which generate load for Spring Integration application
