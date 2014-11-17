@@ -1,0 +1,38 @@
+Manifest-Version: 1.0
+Bundle-Description: The CometD project is a scalable web messaging bus
+  that uses WebSocketand HTTP AJAX push technology patterns known as "
+ Comet" techniques
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0, http://www
+ .opensource.org/licenses/bsd-license.html, http://opensource-definiti
+ on.org/licenses/afl-2.1.html
+Bundle-SymbolicName: cometd-java-examples
+Archiver-Version: Plexus Archiver
+Built-By: simon
+Bnd-LastModified: 1412336933717
+Bundle-ManifestVersion: 2
+Bundle-DocURL: http://docs.cometd.org
+Bundle-Vendor: Dojo Foundation
+Import-Package: org.eclipse.jetty.client;version="[7.6,9)",org.eclipse
+ .jetty.server;version="[7.6,9)",org.eclipse.jetty.server.handler;vers
+ ion="[7.6,9)",org.eclipse.jetty.servlet;version="[7.6,9)",org.eclipse
+ .jetty.util.resource;version="[7.6,9)",org.eclipse.jetty.util.ssl;ver
+ sion="[7.6,9)",org.eclipse.jetty.util.thread;version="[7.6,9)",javax.
+ inject,javax.servlet;version="[3.1,4)",javax.servlet.http;version="[3
+ .1,4)",org.cometd.annotation;version="[3.0,4)",org.cometd.bayeux;vers
+ ion="[3.0,4)",org.cometd.bayeux.client;version="[3.0,4)",org.cometd.b
+ ayeux.server;version="[3.0,4)",org.cometd.client;version="[3.0,4)",or
+ g.cometd.client.transport;version="[3.0,4)",org.cometd.server;version
+ ="[3.0,4)",org.cometd.server.authorizer;version="[3.0,4)",org.cometd.
+ server.ext;version="[3.0,4)",org.cometd.server.filter;version="[3.0,4
+ )",org.slf4j;version="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Bundle-ContactAddress: http://cometd.org/cometd-java/cometd-java-examp
+ les
+Tool: Bnd-2.3.0.201405100607
+Export-Package: org.cometd.examples;uses:="javax.servlet,javax.servlet
+ .http,org.cometd.annotation,org.cometd.bayeux.server";version="3.0.2"
+Bundle-Name: CometD :: Java :: Examples
+Bundle-Version: 3.0.2
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.8.0_20
+
