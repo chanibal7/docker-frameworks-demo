@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>JbossSample</display-name>
+<servlet>
+  <servlet-name>SimpleServlet</servlet-name>
+  <servlet-class>com.appdynamics.servlet.SimpleServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+  <servlet-name>SimpleServlet</servlet-name>
+  <url-pattern>/server/*</url-pattern>
+</servlet-mapping>
+ <servlet>
+        <servlet-name>MessageProducerServlet</servlet-name>
+        <servlet-class>com.appdynamics.servlet.MessageProducerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>QueueSenderServlet</servlet-name>
+        <servlet-class>com.appdynamics.servlet.QueueSenderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TopicSenderServlet</servlet-name>
+        <servlet-class>com.appdynamics.servlet.TopicPublisherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageProducerServlet</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueueSenderServlet</servlet-name>
+        <url-pattern>*.queue</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TopicSenderServlet</servlet-name>
+        <url-pattern>*.topic</url-pattern>
+    </servlet-mapping>
+</web-app>
