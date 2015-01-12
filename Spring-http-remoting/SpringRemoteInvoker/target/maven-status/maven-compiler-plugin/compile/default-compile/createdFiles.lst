@@ -1,0 +1,5 @@
+com\otv\http\server\HttpUserService.class
+com\otv\cache\service\ICacheService.class
+com\otv\cache\service\CacheService.class
+com\otv\user\User.class
+com\otv\http\server\IHttpUserService.class

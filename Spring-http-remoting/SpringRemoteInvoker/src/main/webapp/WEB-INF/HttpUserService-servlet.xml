@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- Beans Declaration -->	
+	<bean id="UserMap" class="java.util.concurrent.ConcurrentHashMap" />
+	
+	<bean id="CacheService" class="com.otv.cache.service.CacheService">
+		<property name="userMap" ref="UserMap"/>
+	</bean>	
+	
+	<bean id="HttpUserService" class="com.otv.http.server.HttpUserService" >
+ 		<property name="cacheService" ref="CacheService"/>
+	</bean>
+		    
+    <!-- Http Invoker Service Declaration -->
+    <bean id="HttpUserServiceExporter" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+    	
+    	<!-- service represents Service Impl -->
+        <property name="service" ref="HttpUserService"/>
+        
+        <!-- serviceInterface represents Http Service Interface exposed -->
+        <property name="serviceInterface" value="com.otv.http.server.IHttpUserService"/>
+           
+    </bean>
+    
+    <!-- Mapping configurations from URLs to request handler beans -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/HttpUserService">HttpUserServiceExporter</prop>
+            </props>
+        </property>
+    </bean>
+	 
+</beans>
