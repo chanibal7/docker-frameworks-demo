@@ -1,0 +1,12 @@
+<beans xmlns="http://xfire.codehaus.org/config/1.0">
+  
+  <service>
+  
+    <name>Banking</name>
+    <namespace>http://localhost:8080/websvc/services/mybank</namespace>
+    <serviceClass>com.mybank.xfire.example.IBankingService</serviceClass>
+    <implementationClass>com.mybank.xfire.example.BankingService</implementationClass>
+
+  </service>  
+  
+</beans>
