@@ -43,37 +43,37 @@ RUN tar -zxvf /mnt/tempdircopy/apache-tomcat-7.0.55.tar.gz -C /mnt/tempdircopy
 RUN cp -r /mnt/tempdircopy/apache-tomcat-7.0.55/* /mnt/dockerdemo/server/tomcatone/
 RUN cp -r /mnt/tempdircopy/apache-tomcat-7.0.55/* /mnt/dockerdemo/server/tomcattwo/
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/grails/catalina1.sh -O /mnt/tempdircopy/catalina1.sh
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/hibernate/catalina1.sh -O /mnt/tempdircopy/catalina1.sh
 RUN dos2unix /mnt/tempdircopy/catalina1.sh
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/grails/catalina2.sh -O /mnt/tempdircopy/catalina2.sh
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/hibernate/catalina2.sh -O /mnt/tempdircopy/catalina2.sh
 RUN dos2unix /mnt/tempdircopy/catalina2.sh
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/grails/server2.xml -O /mnt/tempdircopy/server2.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/hibernate/server2.xml -O /mnt/tempdircopy/server2.xml
 RUN dos2unix /mnt/tempdircopy/server2.xml
 
 RUN cp /mnt/tempdircopy/server2.xml  /mnt/dockerdemo/server/tomcattwo/conf/server.xml
 RUN cp /mnt/tempdircopy/catalina1.sh /mnt/dockerdemo/server/tomcatone/bin/catalina.sh
 RUN cp /mnt/tempdircopy/catalina2.sh /mnt/dockerdemo/server/tomcattwo/bin/catalina.sh
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/grails/GrailsWebservices.war -O /mnt/tempdircopy/GrailsWebservices.war
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/grails/GrailsWebserviceClient.war -O /mnt/tempdircopy/GrailsWebserviceClient.war 
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/hibernate/hibernateWebservice.war -O /mnt/tempdircopy/hibernateWebservice.war
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/hibernate/hibernateWebserviceClient.war -O /mnt/tempdircopy/hibernateWebserviceClient.war 
 
-RUN cp /mnt/tempdircopy/GrailsWebserviceClient.war  /mnt/dockerdemo/server/tomcatone/webapps/GrailsWebserviceClient.war 
-RUN cp /mnt/tempdircopy/GrailsWebservices.war /mnt/dockerdemo/server/tomcattwo/webapps/GrailsWebservices.war
+RUN cp /mnt/tempdircopy/hibernateWebserviceClient.war   /mnt/dockerdemo/server/tomcatone/webapps/hibernateWebserviceClient.war
+RUN cp /mnt/tempdircopy/hibernateWebservice.war /mnt/dockerdemo/server/tomcattwo/webapps/hibernateWebservice.war
 
 #Download java and machine agent configured controller info file
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/grails/controller-info.xml -O /mnt/tempdircopy/controller-info.xml
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/grails/machine-controller-info.xml -O /mnt/tempdircopy/machine-controller-info.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/hibernate/controller-info.xml -O /mnt/tempdircopy/controller-info.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/hibernate/machine-controller-info.xml -O /mnt/tempdircopy/machine-controller-info.xml
 
 #Download script file
 RUN mkdir /mnt/script
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/grails/run.sh -O /mnt/script/run.sh
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/hibernate/run.sh -O /mnt/script/run.sh
 RUN dos2unix /mnt/script/run.sh
 RUN chmod +x /mnt/script/run.sh
 
 #Download SQL file
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/grails.sql -O /mnt/tempdircopy/grails.sql
-RUN dos2unix /mnt/tempdircopy/grails.sql
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/hibernate.sql -O /mnt/tempdircopy/hibernate.sql
+RUN dos2unix /mnt/tempdircopy/hibernate.sql
 ##################### INSTALLATION END #####################
 
  
