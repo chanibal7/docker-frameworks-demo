@@ -71,9 +71,13 @@ RUN dos2unix /mnt/tempdircopy/controller-info.xml
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/servlet/machine-controller-info.xml -O /mnt/tempdircopy/machine-controller-info.xml
 RUN dos2unix /mnt/tempdircopy/machine-controller-info.xml
 
-
-
 #Download SQL file
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/servlet.sql -O /mnt/tempdircopy/servlet.sql
 RUN dos2unix /mnt/tempdircopy/servlet.sql
+
+#Download script file
+RUN mkdir /mnt/script
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/servlet/run.sh -O /mnt/script/run.sh
+RUN dos2unix /mnt/script/run.sh
+RUN chmod +x /mnt/script/run.sh
 ##################### INSTALLATION END #####################
