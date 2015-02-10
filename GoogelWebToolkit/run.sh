@@ -114,7 +114,7 @@ else
 #Restart MYSQL Server.
 mysql_start_stop() {
   /etc/init.d/mysql restart;
-  mysql -uroot -proot "" < /mnt/tempdircopy/gwt.sql
+  mysql -uroot -proot "" < /mnt/tempdircopy/axis.sql
 }
 
 
@@ -175,18 +175,18 @@ after_agent_download() {
   generate_load_url
 }
 
-#generate load for GoogelWebToolkit apps
+#generate load for MySQL apps
 generate_load_url() {
   sleep 15
   echo "Input number of times URL to be hit"
   read counter
-  echo "Please wait generating load for GoogelWebToolkit application......."
+  echo "Please wait generating load for MySQL application......."
   for (( i=1; i <=$counter; i++ ))
   do
-  curl http://localhost:8080/GWTWorld
+  curl http://localhost:8080/MySQLClient/client/
   sleep 5
   done
-  echo "Done with load generation for GoogelWebToolkit application........."
+  echo "Done with load generation for MySQL application........."
 }
 
 #Initial method execution 
