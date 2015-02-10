@@ -73,7 +73,6 @@ RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/apache-axis2-1.6.
 RUN unzip /mnt/tempdircopy/axis2-1.6.2-war.zip -d /mnt/axis2/axis2-1.6.2-war
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/apache-axis2-1.6.2/axis2.war -O /mnt/dockerdemo/server/tomcatone/webapps/axis2.war
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/apache-axis2-1.6.2/FirstWebService.aar -O /mnt/tempdircopy/FirstWebService.aar
-RUN cp /mnt/tempdircopy/FirstWebService.aar  /mnt/dockerdemo/server/tomcatone/webapps/axis2/WEB-INF/services/FirstWebService.aar
 
 #Download SQL file
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/axis.sql -O /mnt/tempdircopy/axis.sql
