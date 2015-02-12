@@ -115,8 +115,7 @@ else
 #Restart PostgresSQL server.
 postgressql_start_stop() {
   /etc/init.d/postgresql start
-  nohup sudo -u postgres psql &
-  nohup su ALTER USER postgres with password 'root' &
+  nohup sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'root';" &
   /etc/init.d/postgresql restart;
 }
 
