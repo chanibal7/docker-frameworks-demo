@@ -4,8 +4,8 @@
 java_setup() {
   export JAVA_HOME=/opt/jdk/jdk1.8.0_05
   export PATH=$JAVA_HOME/bin:$PATH
-  TOMCAT_HOME_ONE=/mnt/server/tomcatone
-  TOMCAT_HOME_TWO=/mnt/server/tomcattwo
+  TOMCAT_HOME_ONE=/mnt/dockerdemo/server/tomcatone
+  TOMCAT_HOME_TWO=/mnt/dockerdemo/server/tomcattwo
   SHUTDOWN_WAIT=20
 echo "Java Home is set to:": $JAVA_HOME
 }
