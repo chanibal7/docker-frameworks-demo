@@ -22,6 +22,12 @@ RUN echo 'mysql-server mysql-server/root_password password root' | sudo debconf-
 RUN echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections 
 RUN apt-get install -y mysql-server
 
+# Install MondoDB
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+RUN apt-get update
+RUN apt-get install mongodb-10gen
+
 # Install Oracle Java 7
 RUN mkdir /mnt/tempdircopy
 RUN cd /mnt/tempdircopy
@@ -45,18 +51,22 @@ RUN tar -zxvf /mnt/tempdircopy/apache-tomcat-7.0.55.tar.gz -C /mnt/tempdircopy
 RUN cp -r /mnt/tempdircopy/apache-tomcat-7.0.55/* /mnt/dockerdemo/server/tomcatone
 RUN cp -r /mnt/tempdircopy/apache-tomcat-7.0.55/* /mnt/dockerdemo/server/tomcattwo
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/gwt/catalina1.sh -O /mnt/dockerdemo/server/tomcatone/bin/catalina.sh
-RUN dos2unix /mnt/dockerdemo/server/tomcatone/bin/catalina.sh
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/gwt/catalina1.sh -O /mnt/tempdircopy/catalina1.sh
+RUN dos2unix /mnt/tempdircopy/catalina1.sh
+RUN cp /mnt/tempdircopy/catalina1.sh /mnt/dockerdemo/server/tomcatone/bin/catalina.sh
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/gwt/catalina2.sh -O /mnt/dockerdemo/server/tomcattwo/bin/catalina.sh
-RUN dos2unix /mnt/dockerdemo/server/tomcattwo/bin/catalina.sh
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-sh-files/gwt/catalina2.sh -O /mnt/tempdircopy/catalina2.sh
+RUN dos2unix /mnt/tempdircopy/catalina2.sh
+RUN cp /mnt/tempdircopy/catalina2.sh /mnt/dockerdemo/server/tomcattwo/bin/catalina.sh
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/gwt/server2.xml -O /mnt/dockerdemo/server/tomcattwo/conf/server.xml
-RUN dos2unix /mnt/dockerdemo/server/tomcattwo/conf/server.xml
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/gwt/GWTWorld.war -O /mnt/dockerdemo/server/tomcatone/webapps/GWTWorld.war
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/gwt/server2.xml -O /mnt/tempdircopy/server.xml
+RUN dos2unix /mnt/tempdircopy/server.xml
+RUN cp /mnt/tempdircopy/server.xml /mnt/dockerdemo/server/tomcattwo/conf/server.xml
 
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/gwt/EmployeeInfoService.war -O /mnt/dockerdemo/server/tomcattwo/webapps/EmployeeInfoService.war
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/gwt/MongoDBClient.war -O /mnt/dockerdemo/server/tomcatone/webapps/MongoDBClient.war 
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/gwt/MyWorldGWT.war -O /mnt/dockerdemo/server/tomcatone/webapps/MyWorldGWT.war
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/gwt/MongoDBService.war -O /mnt/dockerdemo/server/tomcattwo/webapps/MongoDBService.war
 
 #Download java and machine agent configured controller info file
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/gwt/controller-info.xml -O /mnt/tempdircopy/controller-info.xml
@@ -68,7 +78,7 @@ RUN dos2unix /mnt/tempdircopy/machine-controller-info.xml
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/SQL+files/gwt.sql -O /mnt/tempdircopy/gwt.sql
 RUN dos2unix /mnt/tempdircopy/gwt.sql
 
-#Download script file
+#Download run.sh file
 RUN mkdir /mnt/script
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/gwt/run.sh -O /mnt/script/run.sh
 RUN dos2unix /mnt/script/run.sh

@@ -2,11 +2,11 @@
 
 #Setup java home
 java_setup() {
-  export JAVA_HOME=/opt/jdk/jdk1.8.0_05
-  export PATH=$JAVA_HOME/bin:$PATH
-  TOMCAT_HOME_ONE=/mnt/dockerdemo/server/tomcatone
-  TOMCAT_HOME_TWO=/mnt/dockerdemo/server/tomcattwo
-  SHUTDOWN_WAIT=20
+export JAVA_HOME=/opt/jdk/jdk1.8.0_05
+export PATH=$JAVA_HOME/bin:$PATH
+TOMCAT_HOME_ONE=/mnt/dockerdemo/server/tomcatone
+TOMCAT_HOME_TWO=/mnt/dockerdemo/server/tomcattwo
+SHUTDOWN_WAIT=20
 echo "Java Home is set to:": $JAVA_HOME
 }
 
@@ -114,9 +114,15 @@ else
 #Restart MYSQL Server.
 mysql_start_stop() {
   /etc/init.d/mysql restart;
-  mysql -uroot -proot "" < /mnt/tempdircopy/axis.sql
+  mysql -uroot -proot "" < /mnt/tempdircopy/gwt.sql
 }
 
+#Restart MOngoDB server.
+mongodb_start_stop() {
+  sudo chown -R mongodb:mongodb /var/lib/mongodb/.
+  sudo chown -R mongodb:mongodb /var/log/mongodb.log
+  mongod --fork --dbpath /var/lib/mongodb/ --smallfiles --logpath /var/log/mongodb.log --logappend
+}
 
 #Configure Catalina setup
 catalina_setup() {
@@ -170,23 +176,24 @@ pid=$(tomcat_pid)
 #Method calls after javaagent download
 after_agent_download() {
   mysql_start_stop
+  mongodb_start_stop
   catalina_setup
   tomcat_start_stop
   generate_load_url
 }
 
-#generate load for MySQL apps
+#generate load for gwt apps
 generate_load_url() {
   sleep 15
   echo "Input number of times URL to be hit"
   read counter
-  echo "Please wait generating load for MySQL application......."
+  echo "Please wait generating load for GWT application......."
   for (( i=1; i <=$counter; i++ ))
   do
-  curl http://localhost:8080/MySQLClient/client/
+  curl -i http://localhost:8080/MongoDBClient/client/
   sleep 5
   done
-  echo "Done with load generation for MySQL application........."
+  echo "Done with load generation for GWT application........."
 }
 
 #Initial method execution 
