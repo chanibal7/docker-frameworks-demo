@@ -3,9 +3,9 @@
 #Setup java home
 java_setup() {
   export JAVA_HOME=/opt/jdk/jdk1.8.0_05
-  export ORACLE_HOME=/opt/oc4j
   export PATH=$JAVA_HOME/bin:$PATH
-  TOMCAT_HOME=/mnt/dockerdemo/server/tomcat
+  export PGHOST=localhost
+  TOMCAT_HOME_ONE=/mnt/dockerdemo/server/tomcat
   SHUTDOWN_WAIT=20
 echo "Java Home is set to:": $JAVA_HOME
 }
@@ -18,7 +18,7 @@ clean_dir_info() {
   rm -rf agent.zip
   rm -rf machineagent.zip
   rm -rf databaseagent.tar.gz
-  rm -rf /mnt/dockerdemo/javaagentOne
+  rm -rf /mnt/dockerdemo/javaagent
   rm -rf /mnt/dockerdemo/javaagentTwo
   rm -rf /mnt/dockerdemo/machineagent
   rm -rf /mnt/dockerdemo/databaseagent
@@ -95,13 +95,14 @@ then
   echo "Done with agent download..."
   sleep 2
   echo "Unzipping agent..."
-  mkdir /mnt/dockerdemo/javaagentOne
-  export AGENT_DIR_ONE=/mnt/dockerdemo/javaagentOne
-  unzip agent.zip -d $AGENT_DIR_ONE/
-  cp /mnt/tempdircopy/controller-info.xml $AGENT_DIR_ONE/conf/controller-info.xml
-  cd $AGENT_DIR_ONE/conf/
+  mkdir /mnt/dockerdemo/javaagent
+  export AGENT_DIR=/mnt/dockerdemo/javaagent
+  unzip agent.zip -d $AGENT_DIR/
+  cp /mnt/tempdircopy/controller-info.xml $AGENT_DIR/conf/controller-info.xml
+  cd $AGENT_DIR/conf/
   sed -i "s/HOST_NAME/$INPUT_HOST_NAME/g" controller-info.xml
   sed -i "s/PORT_NO/$INPUT_PORT/g" controller-info.xml
+  sleep 2
   
   cd /mnt/dockerdemo/
   mkdir /mnt/dockerdemo/javaagentTwo
@@ -113,6 +114,7 @@ then
   sed -i "s/PORT_NO/$INPUT_PORT/g" controller-info.xml
   sleep 2
   echo "Done with agent unzip.."
+  
   machine_agent_download
   database_agent_download
   after_agent_download
@@ -126,10 +128,16 @@ mysql_start_stop() {
   /etc/init.d/mysql restart;
 }
 
+#OC4J server startup
+oc4j_start_stop() {
+cd /opt/oc4j/j2ee/home
+nohup java -javaagent:/mnt/dockerdemo/javaagentTwo/javaagent.jar -jar oc4j.jar &
+sleep 5
+}
 
 #Configure Catalina setup
 catalina_setup() {
-cd $TOMCAT_HOME/bin/
+cd $TOMCAT_HOME_ONE/bin/
 sed -i "s/HOSTNAME/$INPUT_HOST_NAME/g" catalina.sh
 sed -i "s/PORTNO/$INPUT_PORT/g" catalina.sh
 }
@@ -137,13 +145,6 @@ sed -i "s/PORTNO/$INPUT_PORT/g" catalina.sh
 #Get running tomcat process ID
 tomcat_pid() {
   echo `ps aux | grep org.apache.catalina.startup.Bootstrap | grep -v grep | awk '{ print $2 }'`
-}
-
-#OC4J server startup
-oc4j_start_stop () {
-cd /opt/oc4j/j2ee/home
-nohup java -javaagent:$AGENT_DIR_TWO/javaagent.jar -jar oc4j.jar &
-sleep 5
 }
 
 #Restart tomcat
@@ -157,15 +158,17 @@ pid=$(tomcat_pid)
     ps xu | grep tomcat | grep -v grep | awk '{ print $2 }' | xargs kill -9
         sleep 2
         echo "Killed running tomcat..."
-    # Start tomcat
-    echo "Starting tomcat"
-    $TOMCAT_HOME/bin/startup.sh
+    # Start tomcat one
+    echo "Starting tomcat 1"
+    $TOMCAT_HOME_ONE/bin/startup.sh
+        sleep 5
     echo "Tomcat PID After STOP n START :"  `ps aux | grep org.apache.catalina.startup.Bootstrap | grep -v grep | awk '{ print $2 }'`
         sleep 2
   else
-    # start tomcat
-    echo "Starting tomcat"
-    $TOMCAT_HOME/bin/startup.sh
+    # start tomcat one
+    echo "Starting tomcat 1"
+    $TOMCAT_HOME_ONE/bin/startup.sh
+        sleep 5
     echo "Tomcat PID After RESTART :"  `ps aux | grep org.apache.catalina.startup.Bootstrap | grep -v grep | awk '{ print $2 }'`
         sleep 2
  fi
@@ -174,8 +177,8 @@ pid=$(tomcat_pid)
 #Method calls after javaagent download
 after_agent_download() {
   mysql_start_stop
-  catalina_setup
   oc4j_start_stop
+  catalina_setup
   tomcat_start_stop
   generate_load_url
 }

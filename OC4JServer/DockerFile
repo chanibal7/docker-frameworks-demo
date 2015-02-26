@@ -8,7 +8,6 @@ MAINTAINER Udaya Narayanachar
 RUN apt-get update
 
 ################## BEGIN INSTALLATION ######################
-
 # Install project dependencies
 RUN apt-get install -y curl
 RUN apt-get install -y wget
@@ -22,9 +21,17 @@ RUN echo 'mysql-server mysql-server/root_password password root' | sudo debconf-
 RUN echo 'mysql-server mysql-server/root_password_again password root' | sudo debconf-set-selections 
 RUN apt-get install -y mysql-server
 
+# Download OC4J server
+RUN mkdir /mnt/tempdircopy
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/oc4j_extended_101350/oc4j_extended_101350.zip -O /mnt/tempdircopy/oc4j.zip
+RUN mkdir /opt/oc4j
+RUN unzip /mnt/tempdircopy/oc4j.zip -d /opt/oc4j
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-properties-files/oc4j/application.xml -O /opt/oc4j/j2ee/home/config/application.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-properties-files/oc4j/default-web-site.xml -O /opt/oc4j/j2ee/home/config/default-web-site.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-properties-files/oc4j/system-jazn-data.xml -O /opt/oc4j/j2ee/home/config/system-jazn-data.xml
+RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/oc4j/MySQLClient.war -O /opt/oc4j/j2ee/home/applications/MySQLClient.war 
 
 # Install Oracle Java 7
-RUN mkdir /mnt/tempdircopy
 RUN cd /mnt/tempdircopy
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/jdk-8u5-linux-x64/jdk-8u5-linux-x64.tar.gz
 RUN mkdir /opt/jdk
@@ -51,14 +58,6 @@ RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/
 RUN dos2unix /mnt/dockerdemo/server/tomcat/conf/server.xml
 
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/oc4j/MySQLService.war -O /mnt/dockerdemo/server/tomcat/webapps/MySQLService.war
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/war-files/oc4j/MySQLClient.war -O /opt/oc4j/j2ee/home/applications/MySQLClient.war 
-
-# Download OC4J server
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/oc4j_extended_101350/oc4j_extended_101350.zip -O /mnt/tempdircopy/oc4j.zip
-RUN mkdir /opt/oc4j
-RUN unzip /mnt/tempdircopy/oc4j.zip -d /opt/oc4j
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-properties-files/oc4j/application.xml -O /opt/oc4j/j2ee/home/config/application.xml
-RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-properties-files/oc4j/default-web-site.xml -O /opt/oc4j/j2ee/home/config/default-web-site.xml
 
 #Download java and machine agent configured controller info file
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/Config-xml-files/oc4j/controller-info.xml -O /mnt/tempdircopy/controller-info.xml
@@ -73,6 +72,5 @@ RUN mkdir /mnt/script
 RUN wget https://s3.amazonaws.com/appdynamics-docker-artifacts/script/oc4j/run.sh -O /mnt/script/run.sh
 RUN dos2unix /mnt/script/run.sh
 RUN chmod +x /mnt/script/run.sh
-
-
+WORKDIR /mnt/script
 ##################### INSTALLATION END #####################
